@@ -6,16 +6,16 @@ mongoose.connect(uri);
 const app = express()
 app.use( express.json() )
 const port = 8080
-const { authModel } = require('./models');
+const { personModel } = require('./models');
 app.get('/', (req, res) => { res.send("I am alive person"); })
 
 app.get('/user', async(req,res)=>{
-    const list = await authModel.find({});
+    const list = await personModel.find({});
     res.json( list );
 })
 
 app.get('/user/:dni', async(req, res)=>{
-  const person = await peopleModel.find({dni:req.params.dni});
+  const person = await personModel.find({dni:req.params.dni});
   res.json( person );
 });
 
@@ -23,11 +23,11 @@ app.post('/signup', async(req, res)=>{
     try {
       const name = req.body.name;
       const dni = req.body.dni;
-      const email = req.body.email;
-      const password = req.body.password;
+      const phone = req.body.phone;
+      const codpostal = req.body.codpostal;
       const address = req.body.address;
   
-      const person = new authModel({ name,dni ,email,password , address});
+      const person = new personModel({ name,dni ,phone,codpostal , address});
       
       const data = await person.save();
       return res.status(201).json(data);
