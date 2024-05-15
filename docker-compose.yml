@@ -1,0 +1,29 @@
+services:
+  order_api:
+    build:
+      context: ./order_api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: order_api
+    restart: unless-stopped
+    ports:
+      - "80:8080"
+  
+  person_api:
+    build:
+      context: ./person_api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: person_api
+    restart: unless-stopped
+    ports:
+      - "81:8080"
+  shipment_api:
+    build:
+      context: ./shipment_api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: shipment_api
+    restart: unless-stopped
+    ports:
+      - "82:8080"
